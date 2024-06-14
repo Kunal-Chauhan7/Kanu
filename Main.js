@@ -71,5 +71,20 @@ function tokenizer(input){
             });
             continue;
         }
+        let LETTERS = /[a-z]/i; // handling the alphabets now from a to z
+        if(LETTERS.test(char)){ // if the current char read by the current pointer is in the LETTERS then
+            let value = '';
+            while(LETTERS.test(char)){
+                value+=char; // adding the value of char in current value
+                char = input[++current];
+            }
+            tokens.push({
+                type:'name',value // pushing the tokens created into the tokens 
+            });
+            continue;
+        }
+        throw new TypeError ("The character you have entered is not supported"+char);
+        
     }
+    return tokens;
 } 
