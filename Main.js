@@ -127,14 +127,14 @@ function parser(tokens){
             current++;
             return node;
         }
-        throw new TypeError(token.type);
+        throw new TypeError(token.type); // if any token is not recognized then throw a new error
     }
     let ast = {
         type:'Program',
         body:[],
     };
     while(current<tokens.length){
-        ast.body.push(walk());
+        ast.body.push(walk()); //travese all the tokens and push those tokens into the ast body
     }
-    return ast;
+    return ast; // return the ast 
 }
