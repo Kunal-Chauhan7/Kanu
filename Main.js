@@ -88,3 +88,53 @@ function tokenizer(input){
     }
     return tokens;
 } 
+
+// HERE I have created a the parcer
+// so parser takes in the input and then convert into AST to know more about ast here is the link
+//https://en.wikipedia.org/wiki/Abstract_syntax_tree#:~:text=An%20abstract%20syntax%20tree%20(AST,construct%20occurring%20in%20the%20text.
+
+function parser(tokens){
+    let current = 0; // this will act as our cursor
+    function walk(){
+        let token = tokens[current]; // token which will have the current token value
+        if(token.type==='number'){ // so if the token type is a number we will return a AST node which will be of type NumberLiteral 
+            current++;
+            return{
+                type:'NumberLiteral',
+                value:token.value,
+            };
+        }
+        if(token.type==='string'){
+            current++;
+            return{
+                type: 'StringLiteral',
+                value:token.value,
+            };
+        }
+        if(token.type==='paren'&&token.value==='('){ // In ast we do not care about the parenthesis
+            token = tokens[++current];
+            let node = { //creating a base node and setting the name of the node as the token value cause the next token will be the name of the function right after the open parenthsis
+                type: 'CallExpression',
+                name: token.value,
+                params: [],
+            };
+            token = tokens[++current]; // skiping the name token
+
+            while(token.type!=='paren'||(token.type==='paren'&&token.value!==')')){ // loop untill we get a value of ) or we encounter a paren
+                node.params.push(walk()); // push each node into the node params
+                token = token[current];
+            }
+            current++;
+            return node;
+        }
+        throw new TypeError(token.type);
+    }
+    let ast = {
+        type:'Program',
+        body:[],
+    };
+    while(current<tokens.length){
+        ast.body.push(walk());
+    }
+    return ast;
+}
