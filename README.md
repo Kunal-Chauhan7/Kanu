@@ -3,7 +3,7 @@
 # TO DO 
 ## tokenizer ✅ 
 ## parser ✅
-## traverser
-## transformer
+## traverser ✅
+## transformer ✅
 ## codeGenerator
 ## compiler
