@@ -1,4 +1,5 @@
-## Kanu
+### kanu is programming language built upon javaScript 
+## Kanu 
 
 # TO DO 
 ## tokenizer ✅ 
