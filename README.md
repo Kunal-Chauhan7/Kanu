@@ -5,5 +5,5 @@
 ## parser ✅
 ## traverser ✅
 ## transformer ✅
-## codeGenerator
-## compiler
+## codeGenerator ✅
+## compiler ✅
